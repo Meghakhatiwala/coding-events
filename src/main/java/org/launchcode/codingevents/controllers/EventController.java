@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+//import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.models.EventType;
@@ -18,15 +19,18 @@ import javax.validation.Valid;
 @RequestMapping("events")
 public class EventController {
 
+    //private static List<Event> events = new ArrayList<>();
+
     @Autowired
-    private EventRepository eventRepository;
+     private EventRepository eventRepository;
 
     @GetMapping
     public String displayAllEvents(Model model) {
+
         model.addAttribute("title", "All Events");
         model.addAttribute("events", eventRepository.findAll());
         return "events/index";
-    }
+}
 
     @GetMapping("create")
     public String displayCreateEventForm(Model model) {
@@ -57,14 +61,12 @@ public class EventController {
 
     @PostMapping("delete")
     public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds) {
-
         if (eventIds != null) {
             for (int id : eventIds) {
                 eventRepository.deleteById(id);
             }
         }
-
-        return "redirect:";
+         return "redirect:";
     }
 
 }
